@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OLFU STEM 12 - 1P | Class Website</title>
+  <meta name="description" content="Official class website of OLFU STEM 12 - 1P" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1B5E20;
+      --primary-dark: #0D3B12;
+      --primary-light: #2E7D32;
+      --accent: #FFC107;
+      --accent-soft: #FFE082;
+      --white: #ffffff;
+      --off-white: #f8fafc;
+      --light-gray: #f1f5f9;
+      --gray: #64748b;
+      --dark: #1e293b;
+      --darker: #0f172a;
+      --shadow: 0 4px 20px rgba(27, 94, 32, 0.10);
+      --shadow-hover: 0 12px 40px rgba(27, 94, 32, 0.18);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --nav-height: 70px;
+    }
+    [data-theme="dark"] {
+      --primary: #4CAF50;
+      --primary-dark: #2E7D32;
+      --primary-light: #66BB6A;
+      --accent: #FFD54F;
+      --accent-soft: #FFE082;
+      --white: #1e293b;
+      --off-white: #0f172a;
+      --light-gray: #1e293b;
+      --gray: #94a3b8;
+      --dark: #f1f5f9;
+      --darker: #ffffff;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--off-white);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .section { padding: 80px 0; position: relative; }
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .section-header h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+    .section-header p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 20px auto 0; }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-height);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 2px 20px rgba(27, 94, 32, 0.08);
+      z-index: 1000; transition: var(--transition);
+    }
+    [data-theme="dark"] .navbar { background: rgba(15, 23, 42, 0.9); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+    .navbar.scrolled { box-shadow: 0 4px 30px rgba(27, 94, 32, 0.14); }
+    .nav-container {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px;
+    }
+    .nav-logo { font-size: 1.35rem; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+    .nav-logo span {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a {
+      font-size: 0.9rem; font-weight: 500; color: var(--dark);
+      padding: 8px 14px; border-radius: 8px; transition: var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); background: rgba(27, 94, 32, 0.1); }
+    [data-theme="dark"] .nav-links a:hover, [data-theme="dark"] .nav-links a.active { background: rgba(76, 175, 80, 0.18); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .theme-toggle {
+      width: 40px; height: 40px; border-radius: 50%; border: none;
+      background: var(--light-gray); color: var(--dark); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: var(--transition);
+    }
+    .theme-toggle:hover { background: var(--primary); color: white; transform: rotate(20deg); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; z-index: 1001; }
+    .hamburger span { width: 24px; height: 2.5px; background: var(--primary); border-radius: 2px; transition: var(--transition); }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu {
+      position: fixed; top: var(--nav-height); left: 0; width: 100%;
+      background: var(--white); box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      padding: 20px; display: flex; flex-direction: column; gap: 4px;
+      transform: translateY(-120%); opacity: 0; visibility: hidden; transition: var(--transition); z-index: 999;
+    }
+    .mobile-menu.open { transform: translateY(0); opacity: 1; visibility: visible; }
+    .mobile-menu a { padding: 14px 16px; font-weight: 500; border-radius: var(--radius-sm); transition: var(--transition); color: var(--dark); }
+    .mobile-menu a:hover, .mobile-menu a.active { background: rgba(27, 94, 32, 0.1); color: var(--primary); }
+
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding-top: var(--nav-height);
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 35%, #FF8F00 100%);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('') center/cover no-repeat; opacity: 0.25; z-index: 0;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(13, 59, 18, 0.75) 100%); z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; text-align: center; color: white; padding: 40px 20px; max-width: 800px; }
+    .hero-badge {
+      display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+      padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 1px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.25);
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .hero h1 { font-size: clamp(2.5rem, 7vw, 4.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 16px; text-shadow: 0 4px 30px rgba(0,0,0,0.25); }
+    .hero .tagline { font-size: clamp(1rem, 2.5vw, 1.25rem); font-weight: 300; opacity: 0.95; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px;
+      border-radius: 50px; font-weight: 600; font-size: 1rem; border: none; cursor: pointer;
+      transition: var(--transition); font-family: inherit;
+    }
+    .btn-primary { background: white; color: var(--primary); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: white; }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 2; animation: bounce 2s infinite; }
+    .scroll-indicator span { display: block; width: 24px; height: 40px; border: 2px solid rgba(255,255,255,0.6); border-radius: 12px; position: relative; }
+    .scroll-indicator span::before {
+      content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+      width: 4px; height: 8px; background: white; border-radius: 2px; animation: scroll-dot 2s infinite;
+    }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    @keyframes scroll-dot { 0% { opacity: 1; top: 8px; } 100% { opacity: 0; top: 22px; } }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .about-card {
+      background: var(--white); border-radius: var(--radius); padding: 36px;
+      box-shadow: var(--shadow); transition: var(--transition);
+    }
+    .about-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+    .about-card h3 { font-size: 1.3rem; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .about-card p { color: var(--gray); font-size: 0.95rem; }
+    .about-info { display: flex; flex-direction: column; gap: 20px; }
+    .info-item {
+      background: var(--white); border-radius: var(--radius); padding: 24px 28px;
+      box-shadow: var(--shadow); display: flex; align-items: flex-start; gap: 16px; transition: var(--transition);
+    }
+    .info-item:hover { transform: translateX(6px); box-shadow: var(--shadow-hover); }
+    .info-icon {
+      width: 48px; height: 48px; min-width: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: white;
+    }
+    .info-item h4 { font-size: 1rem; color: var(--dark); margin-bottom: 4px; }
+    .info-item p { font-size: 0.9rem; color: var(--gray); }
+    .motto-box {
+      background: linear-gradient(135deg, #1B5E20, #2E7D32);
+      color: white; border-radius: var(--radius); padding: 36px; text-align: center;
+      box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .motto-box::before { content: '"'; position: absolute; top: -10px; left: 20px; font-size: 8rem; opacity: 0.1; font-family: Georgia, serif; }
+    .motto-box p { font-size: 1.25rem; font-weight: 500; font-style: italic; position: relative; z-index: 1; }
+    .motto-box .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-top: 12px; font-style: normal; }
+
+    .officers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .officers-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .officers-grid { grid-template-columns: 1fr; }
+    }
+    .officer-card {
+      background: var(--white); border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); transition: var(--transition); text-align: center;
+    }
+    .officer-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+    .officer-photo {
+      width: 100%; height: 220px; object-fit: cover;
+      background: linear-gradient(135deg, #c8e6c9, #a5d6a7); position: relative;
+    }
+    .officer-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .officer-photo .placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; color: var(--primary); opacity: 0.4;
+    }
+    .officer-body { padding: 24px 20px 28px; }
+    .officer-body h3 { font-size: 1.15rem; color: var(--dark); margin-bottom: 4px; }
+    .officer-position {
+      display: inline-block; background: rgba(27, 94, 32, 0.12); color: var(--primary);
+      font-size: 0.8rem; font-weight: 600; padding: 4px 14px; border-radius: 50px; margin-bottom: 12px;
+    }
+    [data-theme="dark"] .officer-position { background: rgba(76, 175, 80, 0.2); }
+    .officer-quote { font-size: 0.85rem; color: var(--gray); font-style: italic; line-height: 1.5; }
+
+    .search-bar { max-width: 420px; margin: 0 auto 40px; position: relative; }
+    .search-bar input {
+      width: 100%; padding: 14px 20px 14px 48px; border: 2px solid transparent;
+      border-radius: 50px; background: var(--white); box-shadow: var(--shadow);
+      font-family: inherit; font-size: 0.95rem; color: var(--dark); outline: none; transition: var(--transition);
+    }
+    .search-bar input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(27, 94, 32, 0.12); }
+    .search-bar .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 1.1rem; pointer-events: none; }
+    .students-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+    .student-card {
+      background: var(--white); border-radius: var(--radius); padding: 20px 16px;
+      text-align: center; box-shadow: var(--shadow); transition: var(--transition); cursor: default;
+    }
+    .student-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .student-card.hidden { display: none; }
+    .student-photo {
+      width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 14px; overflow: hidden;
+      background: linear-gradient(135deg, #c8e6c9, #a5d6a7); border: 3px solid rgba(27, 94, 32, 0.15);
+    }
+    .student-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .student-photo .placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: var(--primary); opacity: 0.4;
+    }
+    .student-card h4 { font-size: 0.95rem; color: var(--dark); margin-bottom: 2px; font-weight: 600; }
+    .student-card .nickname { font-size: 0.8rem; color: var(--gray); }
+    .no-results { text-align: center; color: var(--gray); padding: 40px; display: none; grid-column: 1 / -1; }
+
+    .announcements-list { display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin: 0 auto; }
+    .announcement-card {
+      background: var(--white); border-radius: var(--radius); padding: 28px 32px;
+      box-shadow: var(--shadow); display: flex; gap: 24px; transition: var(--transition);
+      border-left: 4px solid var(--primary);
+    }
+    .announcement-card:hover { transform: translateX(6px); box-shadow: var(--shadow-hover); }
+    .announcement-date { min-width: 70px; text-align: center; }
+    .announcement-date .day { font-size: 1.8rem; font-weight: 700; color: var(--primary); line-height: 1; }
+    .announcement-date .month { font-size: 0.8rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+    .announcement-body h3 { font-size: 1.1rem; color: var(--dark); margin-bottom: 6px; }
+    .announcement-body p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    .gallery-item {
+      position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3;
+      cursor: pointer; box-shadow: var(--shadow); transition: var(--transition);
+    }
+    .gallery-item:hover { transform: scale(1.03); box-shadow: var(--shadow-hover); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-item .placeholder {
+      width: 100%; height: 100%; background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+      display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--primary); opacity: 0.5;
+    }
+    .gallery-item .overlay {
+      position: absolute; inset: 0; background: rgba(27, 94, 32, 0.55);
+      display: flex; align-items: center; justify-content: center; opacity: 0; transition: var(--transition);
+      color: white; font-size: 1.5rem;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+    .lightbox {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.9); z-index: 2000;
+      display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden;
+      transition: var(--transition); padding: 20px;
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox img { max-width: 90%; max-height: 85vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .lightbox-close {
+      position: absolute; top: 24px; right: 28px; background: none; border: none; color: white;
+      font-size: 2rem; cursor: pointer; width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; transition: var(--transition);
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.15); }
+
+    .schedule-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .schedule-day-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: stretch;
+      gap: 24px;
+      transition: var(--transition);
+      border: 1px solid rgba(27, 94, 32, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .schedule-day-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .schedule-day-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      border-radius: 20px 0 0 20px;
+    }
+    .day-name {
+      min-width: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      text-transform: uppercase;
+      border-right: 1px solid var(--light-gray);
+      padding-right: 20px;
+    }
+    .day-classes {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 4px 0;
+    }
+    .class-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .class-time {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .class-subject {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dark);
+      text-align: right;
+    }
+    @media (max-width: 600px) {
+      .schedule-day-card {
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px;
+      }
+      .day-name {
+        min-width: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--light-gray);
+        padding-right: 0;
+        padding-bottom: 12px;
+        justify-content: flex-start;
+      }
+      .class-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .class-subject {
+        text-align: left;
+      }
+    }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .contact-form { background: var(--white); border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow); }
+    .contact-form h3 { font-size: 1.3rem; color: var(--primary); margin-bottom: 24px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 12px 16px; border: 2px solid var(--light-gray); border-radius: var(--radius-sm);
+      font-family: inherit; font-size: 0.95rem; color: var(--dark); background: var(--off-white);
+      outline: none; transition: var(--transition); resize: vertical;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(27, 94, 32, 0.12); }
+    .form-group textarea { min-height: 120px; }
+    .contact-form .btn { width: 100%; justify-content: center; background: linear-gradient(135deg, #1B5E20, #2E7D32); color: white; }
+    .contact-form .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(27, 94, 32, 0.3); }
+    .contact-info { display: flex; flex-direction: column; gap: 20px; }
+    .contact-card {
+      background: var(--white); border-radius: var(--radius); padding: 24px 28px;
+      box-shadow: var(--shadow); display: flex; align-items: center; gap: 16px; transition: var(--transition);
+    }
+    .contact-card:hover { transform: translateX(6px); box-shadow: var(--shadow-hover); }
+    .contact-card .icon {
+      width: 50px; height: 50px; min-width: 50px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: white;
+    }
+    .contact-card h4 { font-size: 0.95rem; color: var(--dark); margin-bottom: 2px; }
+    .contact-card p { font-size: 0.85rem; color: var(--gray); }
+    .social-links { display: flex; gap: 12px; margin-top: 8px; }
+    .social-links a {
+      width: 44px; height: 44px; border-radius: 50%; background: var(--white); box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--primary); transition: var(--transition);
+    }
+    .social-links a:hover { background: var(--primary); color: white; transform: translateY(-4px); }
+
+    .footer { background: var(--darker); color: rgba(255,255,255,0.7); padding: 40px 0 24px; text-align: center; }
+    [data-theme="dark"] .footer { background: #020617; }
+    .footer h3 { color: white; font-size: 1.2rem; margin-bottom: 8px; }
+    .footer p { font-size: 0.9rem; margin-bottom: 20px; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
+    .footer-links a { font-size: 0.85rem; transition: var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.8rem; }
+
+    .back-to-top {
+      position: fixed; bottom: 28px; right: 28px; width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #1B5E20, #FFC107); color: white; border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+      box-shadow: 0 6px 25px rgba(27, 94, 32, 0.35); opacity: 0; visibility: hidden;
+      transform: translateY(20px); transition: var(--transition); z-index: 900;
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { transform: translateY(-4px); box-shadow: 0 10px 35px rgba(27, 94, 32, 0.45); }
+
+    .loader {
+      position: fixed; inset: 0; background: var(--primary); display: flex; align-items: center;
+      justify-content: center; z-index: 9999; transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-content { text-align: center; color: white; }
+    .loader-spinner {
+      width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.2);
+      border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 992px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 60px 0; }
+      .hero { min-height: 90vh; }
+      .students-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .announcement-card { flex-direction: column; gap: 12px; padding: 24px; }
+      .announcement-date { display: flex; align-items: baseline; gap: 8px; }
+      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 280px; justify-content: center; }
+      .students-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+      <p>STEM 12 - 1P</p>
+    </div>
+  </div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo"><span id="navLogo">STEM 12 - 1P</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#officers" class="nav-link">Officers</a>
+        <a href="#students" class="nav-link">Students</a>
+        <a href="#announcements" class="nav-link">Announcements</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#schedule" class="nav-link">Schedule</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" class="nav-link">Home</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#officers" class="nav-link">Officers</a>
+    <a href="#students" class="nav-link">Students</a>
+    <a href="#announcements" class="nav-link">Announcements</a>
+    <a href="#gallery" class="nav-link">Gallery</a>
+    <a href="#schedule" class="nav-link">Schedule</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-badge" id="heroBadge">Our Lady of Fatima University</div>
+      <h1 id="heroTitle">OLFU STEM 12 - 1P</h1>
+      <p class="tagline" id="heroTagline"></p>
+      <div class="hero-buttons">
+        <a href="#about" class="btn btn-primary">Welcome to our class ↓</a>
+        <a href="#students" class="btn btn-outline">Meet the Students</a>
+      </div>
+    </div>
+    <div class="scroll-indicator"><span></span></div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>About the Class</h2>
+        <p>Get to know who we are and what drives us.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-info reveal">
+          <div class="about-card">
+            <h3>📚 Who We Are</h3>
+            <p id="aboutDescription"></p>
+          </div>
+          <div class="info-item reveal reveal-delay-1">
+            <div class="info-icon">👩‍🏫</div>
+            <div>
+              <h4>Class Adviser</h4>
+              <p id="adviserName"></p>
+            </div>
+          </div>
+          <div class="info-item reveal reveal-delay-2">
+            <div class="info-icon">🎯</div>
+            <div>
+              <h4>Mission</h4>
+              <p id="missionText"></p>
+            </div>
+          </div>
+          <div class="info-item reveal reveal-delay-3">
+            <div class="info-icon">🌟</div>
+            <div>
+              <h4>Vision</h4>
+              <p id="visionText"></p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="motto-box">
+            <p id="mottoText"></p>
+            <div class="label">Our Class Motto</div>
+          </div>
+          <div style="margin-top: 24px;">
+            <div class="about-card">
+              <h3>💡 Fun Facts</h3>
+              <p id="funFacts"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="officers" style="background: var(--light-gray);">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Class Officers</h2>
+        <p>The dedicated leaders who keep our class running smoothly.</p>
+      </div>
+      <div class="officers-grid" id="officersGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="students">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Students Directory</h2>
+        <p>Meet the brilliant minds of STEM 12 - 1P.</p>
+      </div>
+      <div class="search-bar reveal">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="studentSearch" placeholder="Search students by name..." aria-label="Search students" />
+      </div>
+      <div class="students-grid" id="studentsGrid">
+        <div class="no-results" id="noResults">No students found matching your search.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="announcements" style="background: var(--light-gray);">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Announcements</h2>
+        <p>Stay updated with the latest class news and reminders.</p>
+      </div>
+      <div class="announcements-list" id="announcementsList"></div>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Gallery</h2>
+        <p>Capturing our best moments together.</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img src="" alt="Enlarged photo" id="lightboxImg" />
+  </div>
+
+  <section class="section" id="schedule" style="background: var(--light-gray);">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Class Schedule</h2>
+        <p>Our weekly timetable — STEM 12 - 1P</p>
+      </div>
+      <div class="schedule-cards" id="scheduleCards"></div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Contact & Feedback</h2>
+        <p>Have questions or suggestions? Reach out to us!</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-form reveal">
+          <h3>Send a Message</h3>
+          <form id="contactForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Write your message or feedback here..." required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+        <div class="contact-info reveal reveal-delay-1">
+          <div class="contact-card">
+            <div class="icon">📧</div>
+            <div>
+              <h4>Email</h4>
+              <p id="contactEmail"></p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="icon">📍</div>
+            <div>
+              <h4>Campus</h4>
+              <p id="contactLocation"></p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="icon">👩‍🏫</div>
+            <div>
+              <h4>Class Adviser</h4>
+              <p id="contactAdviser"></p>
+            </div>
+          </div>
+          <div>
+            <h4 style="margin-bottom: 12px; color: var(--dark); font-size: 0.95rem;">Follow Us</h4>
+            <div class="social-links" id="socialLinks"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <h3 id="footerTitle">OLFU STEM 12 - 1P</h3>
+      <p id="footerTagline">Excellence • Integrity • Service</p>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#officers">Officers</a>
+        <a href="#students">Students</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-bottom" id="footerBottom"></div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    const classData = {
+      className: "OLFU STEM 12 - 1P",
+      shortName: "STEM 12 - 1P",
+      university: "Our Lady of Fatima University",
+      tagline: "Excellence • Integrity • Service — Building the future one discovery at a time.",
+      heroBackground: "CHANGE_TO_YOUR_CLASS_PHOTO.jpg",
+      aboutDescription: "We are the STEM 12 - 1P batch of Our Lady of Fatima University (Pampanga Campus) — a passionate group of Grade 12 students dedicated to science, technology, engineering, and mathematics. Together we learn, grow, and support each other toward academic excellence and personal development.",
+      adviser: "Mr. Jei Bonzon",
+      mission: "To foster curiosity, critical thinking, and collaboration in every learner.",
+      vision: "To become future leaders and innovators who serve society with integrity.",
+      motto: "Sapientia et Unitas: Lead to Excellency",
+      funFacts: "• Founded in 2024<br>• 43 amazing students<br>• Active in outreach and community service",
+      officers: [
+        { name: "Andrea Nicole Honrada", position: "President", quote: "Leadership is not about being in charge. It's about taking care of those in your charge.", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Mary Laisa Mayo", position: "Vice President", quote: "Supporting each other is how we all succeed.", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Sha Nicah Suñga", position: "Secretary", quote: "Organization is the key to excellence.", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Sicah Ysabelle Castillo", position: "Treasurer", quote: "Every peso counts when we work together.", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Rhianna Sarmiento", position: "Auditor", quote: "Accuracy and honesty in everything we do.", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Andrei Kenneth David", position: "P.I.O.", quote: "Clear communication builds a stronger class.", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Tricia Tiglao", position: "P.O.", quote: "Discipline and unity make us better.", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Hailee Gonzales", position: "Muse", quote: "Grace and excellence in all we do.", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Markiel Liam", position: "Escort", quote: "Support and strength for the class.", photo: "CHANGE_TO_YOUR_PIC.jpg" }
+      ],
+      students: [
+        { name: "Adeline Aira Aquino", nickname: "Adeline", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Alyana Khali", nickname: "Aly", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Andrea Nicole Honrada", nickname: "Andrea", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Andrei Bañaga", nickname: "Andrei", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Andrei David", nickname: "Drei", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Andreu David", nickname: "Drue", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Ashley Cassandra", nickname: "Ash", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Cathleen Herrera", nickname: "Cath", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Christine Kyle Agustin", nickname: "Tine", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "David Gabriel", nickname: "David", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Dhein Gonzales", nickname: "Dhein", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Faith Estacio", nickname: "Faith", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Gabriel Lopez", nickname: "Gab", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Gracelhene Joy Alea Tibung", nickname: "Gracelhene", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Hailee Gonzales", nickname: "Hailee", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Janina Torres", nickname: "Janina", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Jerod Gabriel Gallano", nickname: "Jerod", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Joanna Pineda", nickname: "Jo", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "John Lester Camacho", nickname: "Lester", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "John Mark Dinoy", nickname: "JM", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Joshua Caleb De Lima", nickname: "Josh", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Julius Gatchalian", nickname: "Juls", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Kyle Xyrus Gonzales", nickname: "Kyle", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Laisa Mayo", nickname: "Mary", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Manuel John Canlas", nickname: "Mans", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Markiel Liam", nickname: "Markiel", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Paul Julian Guballa", nickname: "PJ", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Prince Alfred E. Aquino", nickname: "Prince", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Ramces Carlos M. Ruiz", nickname: "Ramces", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Randel Catangal", nickname: "Randel", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Reigne Dela Cruz", nickname: "Reigne", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Rhianna Sarmiento", nickname: "Rhi", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Ricardo Miguel Gonzales", nickname: "Ric", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Samuel Gonzales", nickname: "Sam", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Savannah Mae A. Talima", nickname: "Sav", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Sebastian Doria", nickname: "Seb", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Sha Nicah Suñga", nickname: "Sha", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Shean Marquez", nickname: "Shean", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Sicah Castillo", nickname: "Sicah", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Thirdy Bondoc", nickname: "Thirdy", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Tracy Calliung", nickname: "Tracy", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Tricia Joy Tiglao", nickname: "Tricia", photo: "CHANGE_TO_YOUR_PIC.jpg" },
+        { name: "Wilfredo Martinez", nickname: "Wil", photo: "CHANGE_TO_YOUR_PIC.jpg" }
+      ],
+      announcements: [
+        { day: "14", month: "Jul", title: "Welcome to the New School Year!", message: "Hello STEM 12-1P! We're excited to start this journey together. Please check the schedule section for your class timetable and don't forget to join our group chat." },
+        { day: "23", month: "Jul", title: "RES 2 – Proposal of Quantitative Title", message: "Preparation for a Mini Defense of the Proposed Title. Please prepare your quantitative research title proposal." },
+        { day: "25", month: "Jul", title: "PE – Performance Task", message: "Bring HANDKERCHIEF for the Performance Task." }
+      ],
+      gallery: [
+        { src: "pic1.jpg", alt: "Class activity 1" },
+        { src: "pic4.jpg", alt: "Class activity 2" },
+        { src: "pic3.jpg", alt: "Class activity 3" },
+        { src: "pic2.jpg", alt: "Class activity 4" }
+      ],
+      schedule: [
+        { day: "TUESDAY", classes: [ { time: "7:00 AM – 10:00 AM", subject: "GEN BIO 1" }, { time: "10:20 AM – 1:20 PM", subject: "DRRR" } ] },
+        { day: "THURSDAY", classes: [ { time: "7:00 AM – 10:00 AM", subject: "PHILO 1" }, { time: "10:20 AM – 1:20 PM", subject: "RES 2" } ] },
+        { day: "FRIDAY", classes: [ { time: "7:00 AM – 10:00 AM", subject: "ENTREP" }, { time: "10:20 AM – 1:20 PM", subject: "GEN PHYSICS 1" } ] },
+        { day: "SATURDAY", classes: [ { time: "7:00 AM – 10:00 AM", subject: "FIL 3" }, { time: "11:20 AM – 12:20 PM", subject: "PE" } ] }
+      ],
+      email: "stem12.1p@olfu.edu.ph",
+      location: "Our Lady of Fatima University<br>Pampanga Campus",
+      socials: [
+        { icon: "📘", url: "https://www.facebook.com/profile.php?id=61578618698913", title: "Facebook" },
+        { icon: "📷", url: "https://instagram.com", title: "Instagram" },
+        { icon: "🐦", url: "https://twitter.com", title: "Twitter / X" },
+        { icon: "🎵", url: "https://tiktok.com", title: "TikTok" }
+      ],
+      footerYear: "2026"
+    };
+
+    function renderAll() {
+      document.getElementById('navLogo').textContent = classData.shortName;
+      document.getElementById('heroBadge').textContent = classData.university;
+      document.getElementById('heroTitle').textContent = classData.className;
+      document.getElementById('heroTagline').textContent = classData.tagline;
+      document.title = classData.className + " | Class Website";
+
+      if (classData.heroBackground && !classData.heroBackground.includes('CHANGE_TO')) {
+        const style = document.createElement('style');
+        style.textContent = `.hero::before { background-image: url('${classData.heroBackground}'); }`;
+        document.head.appendChild(style);
+      }
+
+      document.getElementById('aboutDescription').textContent = classData.aboutDescription;
+      document.getElementById('adviserName').textContent = classData.adviser;
+      document.getElementById('missionText').textContent = classData.mission;
+      document.getElementById('visionText').textContent = classData.vision;
+      document.getElementById('mottoText').textContent = classData.motto;
+      document.getElementById('funFacts').innerHTML = classData.funFacts;
+
+      document.getElementById('officersGrid').innerHTML = classData.officers.map((o, i) => `
+        <div class="officer-card reveal ${i > 0 ? 'reveal-delay-' + Math.min(i, 3) : ''}">
+          <div class="officer-photo">
+            <img src="${o.photo}" alt="${o.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'placeholder\\'>👤</div>';" />
+          </div>
+          <div class="officer-body">
+            <h3>${o.name}</h3>
+            <span class="officer-position">${o.position}</span>
+            <p class="officer-quote">"${o.quote}"</p>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('studentsGrid').innerHTML = classData.students.map((s, i) => `
+        <div class="student-card reveal ${i % 4 === 1 ? 'reveal-delay-1' : i % 4 === 2 ? 'reveal-delay-2' : i % 4 === 3 ? 'reveal-delay-3' : ''}" data-name="${s.name.toLowerCase()}">
+          <div class="student-photo">
+            <img src="${s.photo}" alt="${s.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'placeholder\\'>👤</div>';" />
+          </div>
+          <h4>${s.name}</h4>
+          <span class="nickname">"${s.nickname}"</span>
+        </div>
+      `).join('') + `<div class="no-results" id="noResults">No students found matching your search.</div>`;
+
+      document.getElementById('announcementsList').innerHTML = classData.announcements.map((a, i) => `
+        <div class="announcement-card reveal ${i > 0 ? 'reveal-delay-' + Math.min(i, 2) : ''}">
+          <div class="announcement-date">
+            <div class="day">${a.day}</div>
+            <div class="month">${a.month}</div>
+          </div>
+          <div class="announcement-body">
+            <h3>${a.title}</h3>
+            <p>${a.message}</p>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('galleryGrid').innerHTML = classData.gallery.map((g, i) => `
+        <div class="gallery-item reveal ${i % 4 === 1 ? 'reveal-delay-1' : i % 4 === 2 ? 'reveal-delay-2' : i % 4 === 3 ? 'reveal-delay-3' : ''}" onclick="openLightbox(this)">
+          <img src="${g.src}" alt="${g.alt}" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder')?.remove(); this.parentElement.insertAdjacentHTML('afterbegin','<div class=\\'placeholder\\'>📷</div>');" />
+          <div class="overlay">🔍</div>
+        </div>
+      `).join('');
+
+      document.getElementById('scheduleCards').innerHTML = classData.schedule.map((day, i) => `
+        <div class="schedule-day-card reveal ${i > 0 ? 'reveal-delay-' + Math.min(i, 3) : ''}">
+          <div class="day-name">${day.day}</div>
+          <div class="day-classes">
+            ${day.classes.map(c => `
+              <div class="class-row">
+                <span class="class-time">${c.time}</span>
+                <span class="class-subject">${c.subject}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('contactEmail').textContent = classData.email;
+      document.getElementById('contactLocation').innerHTML = classData.location;
+      document.getElementById('contactAdviser').textContent = classData.adviser;
+      document.getElementById('socialLinks').innerHTML = classData.socials.map(s =>
+        `<a href="${s.url}" target="_blank" rel="noopener" title="${s.title}" aria-label="${s.title}">${s.icon}</a>`
+      ).join('');
+
+      document.getElementById('footerTitle').textContent = classData.className;
+      document.getElementById('footerTagline').textContent = classData.tagline.split('—')[0].trim() || "Excellence • Integrity • Service";
+      document.getElementById('footerBottom').innerHTML = `&copy; ${classData.footerYear} ${classData.shortName} | ${classData.university}. All rights reserved.`;
+
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }
+
+    window.addEventListener('load', () => {
+      renderAll();
+      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600);
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      themeToggle.textContent = '☀️';
+    }
+    themeToggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        themeToggle.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    const navbar = document.getElementById('navbar');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    function updateActiveNav() {
+      const scrollY = window.scrollY;
+      navbar.classList.toggle('scrolled', scrollY > 50);
+      let current = '';
+      sections.forEach(section => {
+        if (scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
+    }
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    document.getElementById('studentSearch').addEventListener('input', function () {
+      const query = this.value.toLowerCase().trim();
+      let visible = 0;
+      document.querySelectorAll('.student-card').forEach(card => {
+        const match = (card.getAttribute('data-name') || '').includes(query);
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+      const noRes = document.getElementById('noResults');
+      if (noRes) noRes.style.display = visible === 0 ? 'block' : 'none';
+    });
+
+    function openLightbox(el) {
+      const img = el.querySelector('img');
+      if (!img || !img.src || img.src.includes('CHANGE_TO')) return;
+      document.getElementById('lightboxImg').src = img.src;
+      document.getElementById('lightboxImg').alt = img.alt;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      alert('Thank you, ' + name + '! Your message has been received.');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
