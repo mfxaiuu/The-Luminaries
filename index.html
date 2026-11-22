@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>An Ode to Her Allure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-soft: #111111;
+      --text: #f5f0eb;
+      --text-muted: #b8a99a;
+      --accent: #c9a27c;
+      --accent-soft: #e8d5c0;
+      --line: rgba(201, 162, 124, 0.35);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.45;
+    }
+
+    /* ========== INTRO ========== */
+    .intro {
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      transition: opacity 1.1s ease, visibility 1.1s ease;
+    }
+
+    .intro.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-line {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin-bottom: 2rem;
+      transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .intro.show-line .intro-line {
+      width: 140px;
+    }
+
+    .intro-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 1s ease 0.35s, transform 1s ease 0.35s;
+    }
+
+    .intro.show-text .intro-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .intro-sub {
+      margin-top: 1.1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--text-muted);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1s ease 0.7s, transform 1s ease 0.7s;
+    }
+
+    .intro.show-sub .intro-sub {
+      opacity: 0.85;
+      transform: translateY(0);
+    }
+
+    .intro-hint {
+      position: absolute;
+      bottom: 2.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0;
+      transition: opacity 1s ease 1.4s;
+    }
+
+    .intro.show-hint .intro-hint {
+      opacity: 0.55;
+    }
+
+    /* ========== SHARED FULL SECTION ========== */
+    .full-section {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      position: relative;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.1rem;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201, 162, 124, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(201, 162, 124, 0.05) 0%, transparent 50%),
+        var(--bg);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1), transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-ornament {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 0 auto 1.8rem;
+      position: relative;
+    }
+
+    .hero-ornament::before,
+    .hero-ornament::after {
+      content: '✦';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+
+    .hero-ornament::before { left: -18px; }
+    .hero-ornament::after { right: -18px; }
+
+    .hero-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    .hero-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.8rem, 10vw, 5.2rem);
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+    }
+
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.05rem, 3.2vw, 1.45rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+      letter-spacing: 0.02em;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transition: opacity 1.2s ease 1.8s;
+    }
+
+    .scroll-hint.visible {
+      opacity: 0.5;
+      animation: float 2.8s ease-in-out infinite;
+    }
+
+    .scroll-hint span {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .scroll-hint .line {
+      width: 1px;
+      height: 28px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ========== COUNTDOWN (full screen) ========== */
+    .countdown-section {
+      background: var(--bg);
+    }
+
+    .countdown-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.1rem);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.9rem;
+    }
+
+    .countdown-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-style: italic;
+      max-width: 440px;
+      margin: 0 auto 2.8rem;
+      line-height: 1.65;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.9rem;
+      max-width: 520px;
+      margin: 0 auto 1.8rem;
+      width: 100%;
+    }
+
+    .countdown-item {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 1.5rem 0.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      min-width: 2.4ch;
+    }
+
+    .countdown-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .countdown-note {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ========== DRESS CODE ========== */
+    .dress-code-section {
+      min-height: 82vh;
+      padding: 6rem 1.5rem;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.22), transparent 65%),
+        #dcd4c8;
+      color: #292522;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .dress-code-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3.5rem;
+    }
+    .dress-code-header .section-label {
+      color: #a9824d;
+      margin-bottom: .6rem;
+    }
+    .dress-code-title {
+      font: 400 clamp(2.8rem, 7vw, 4.2rem)/1.1 'Playfair Display', serif;
+      margin-bottom: .9rem;
+      color: #292522;
+    }
+    .dress-code-subtitle {
+      color: #6f675e;
+      font: 400 1rem/1.7 Arial, sans-serif;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .dress-code-content {
+      width: min(100%, 900px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 3rem;
+    }
+    .dress-code-palette-label {
+      color: #a9824d;
+      font: 600 .68rem Arial, sans-serif;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .dress-code-swatch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .dress-code-swatch {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #111111;
+      border: 1px solid rgba(0,0,0,.18);
+      box-shadow: 0 3px 12px rgba(0,0,0,.09);
+    }
+    .dress-code-swatch-name {
+      color: #3b3631;
+      font: 400 1rem Arial, sans-serif;
+      margin-top: .65rem;
+      text-align: center;
+    }
+    .dress-code-note {
+      color: #6f675e;
+      font: 400 .9rem/1.85 Arial, sans-serif;
+      max-width: 470px;
+    }
+    .dress-code-quote {
+      background: rgba(244,239,231,.72);
+      border-left: 2px solid #b78d55;
+      padding: 1.6rem 1.8rem;
+      color: #4a433d;
+      font: 400 1.2rem/1.7 'Cormorant Garamond', serif;
+    }
+    .dress-code-quote strong {
+      display: block;
+      font: 600 .72rem Arial, sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #a9824d;
+      margin-bottom: .6rem;
+    }
+    @media (max-width: 700px) {
+      .dress-code-section { min-height: auto; padding: 5rem 1.4rem; }
+      .dress-code-content { grid-template-columns: 1fr; gap: 2rem; }
+      .dress-code-quote { padding: 1.3rem 1.4rem; }
+    }
+
+    /* ========== VENUE (full screen) ========== */
+    .venue-section {
+      background: var(--bg);
+    }
+
+    .venue-header {
+      margin-bottom: 2.2rem;
+    }
+
+    .venue-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5.5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .venue-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      width: 100%;
+      max-width: 860px;
+    }
+
+    .venue-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 2.4rem 1.8rem;
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .venue-card::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(201, 162, 124, 0.12);
+      pointer-events: none;
+    }
+
+    .venue-card-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
+
+    .venue-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.7rem;
+      line-height: 1.3;
+    }
+
+    .venue-address {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.1rem;
+    }
+
+    .venue-note {
+      font-size: 0.92rem;
+      color: var(--accent-soft);
+      font-style: italic;
+      margin-bottom: 1.6rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      border: 1px solid var(--accent);
+      color: var(--accent-soft);
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.35s ease;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: #0a0a0a;
+    }
+
+    .map-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    .map-card::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(201, 162, 124, 0.12);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .map-embed {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      border: 0;
+      filter: grayscale(30%) contrast(1.05) brightness(0.85);
+      transition: filter 0.4s ease;
+    }
+
+    .map-card:hover .map-embed {
+      filter: grayscale(10%) contrast(1.05) brightness(0.95);
+    }
+
+    .map-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.55) 0%, transparent 45%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 1.4rem;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .map-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      opacity: 0.9;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      text-align: center;
+      padding: 3.5rem 1.5rem 4rem;
+      border-top: 1px solid rgba(201, 162, 124, 0.12);
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    footer .heart {
+      color: var(--accent);
+    }
+
+
+    /* ========== EDITORIAL 18 SEGMENTS ========== */
+    .segments-section {
+      padding: 6rem 1.5rem;
+      background:
+        radial-gradient(ellipse 70% 35% at 50% 0%, rgba(201,162,124,.07), transparent 70%),
+        var(--bg);
+    }
+    .segments-intro {
+      max-width: 650px;
+      margin: 0 auto 4rem;
+      text-align: center;
+    }
+    .segments-title, .gallery-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      font-weight: 400;
+      margin-bottom: .8rem;
+    }
+    .segments-description, .gallery-description {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      font-style: italic;
+    }
+    .segment-poster {
+      width: min(100%, 940px);
+      min-height: 510px;
+      margin: 0 auto 4rem;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(201,162,124,.12), transparent 55%),
+        linear-gradient(135deg, #191512, #090909 72%);
+      box-shadow: 0 22px 65px rgba(0,0,0,.28);
+    }
+    .segment-photo {
+      min-height: 510px;
+      margin: 1rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(201,162,124,.10), transparent 45%),
+        repeating-linear-gradient(135deg, #171411 0, #171411 1px, #100e0d 1px, #100e0d 8px);
+      border: 1px solid rgba(201,162,124,.24);
+    }
+    .segment-photo::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(201,162,124,.18);
+      pointer-events: none;
+    }
+    .photo-placeholder-mark {
+      color: var(--accent);
+      font: italic clamp(3rem, 8vw, 5.5rem) 'Great Vibes', cursive;
+      opacity: .55;
+    }
+    .photo-placeholder-caption {
+      position: absolute;
+      bottom: 2rem;
+      left: 1rem;
+      right: 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .segment-copy {
+      padding: 2.7rem 2rem 2.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .segment-kicker {
+      color: var(--accent);
+      font-size: .65rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin-bottom: .4rem;
+    }
+    .segment-script {
+      font: clamp(3.2rem, 7vw, 5.2rem)/1.05 'Great Vibes', cursive;
+      color: var(--accent-soft);
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+    }
+    .segment-names {
+      list-style: none;
+      width: 100%;
+      max-width: 290px;
+      max-height: 340px;
+      overflow-y: auto;
+      padding: .1rem .5rem .1rem 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) transparent;
+    }
+    .segment-names li {
+      color: #e8ded3;
+      font: 500 1rem/1.35 'Cormorant Garamond', serif;
+      letter-spacing: .035em;
+      padding: .16rem .2rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .segment-names li.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .segment-names li.placeholder-name {
+      color: var(--text-muted);
+      font-style: italic;
+      opacity: .72;
+    }
+    .segment-index {
+      color: var(--accent);
+      font-size: .62rem;
+      letter-spacing: .24em;
+      margin-top: 1.1rem;
+    }
+    .gallery-section {
+      min-height: 100vh;
+      padding: 6rem 1.5rem;
+      background: #0d0c0b;
+    }
+    .gallery-heading {
+      text-align: center;
+      margin: 0 auto 3rem;
+    }
+    .editorial-gallery {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      grid-template-rows: 220px 260px;
+      gap: 1rem;
+    }
+    .gallery-frame {
+      position: relative;
+      overflow: hidden;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #1a1714, #0c0c0c);
+      border: 1px solid var(--line);
+    }
+    .gallery-frame::before {
+      content: '';
+      position: absolute;
+      inset: 9px;
+      border: 1px solid rgba(201,162,124,.13);
+    }
+    .gallery-frame span {
+      color: var(--accent);
+      font: italic 1.8rem 'Great Vibes', cursive;
+      opacity: .65;
+    }
+    .gallery-frame small {
+      position: absolute;
+      bottom: 1.2rem;
+      color: var(--text-muted);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .gallery-frame.tall { grid-row: span 2; }
+    .gallery-frame.wide { grid-column: span 2; }
+    @media (max-width: 700px) {
+      .segment-poster {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        max-width: 470px;
+      }
+      .segment-photo {
+        min-height: 390px;
+        margin: .8rem .8rem 0;
+      }
+      .segment-copy { padding: 1.5rem 1.2rem 2rem; }
+      .segment-names { max-height: 300px; }
+      .editorial-gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 180px 220px 180px;
+        gap: .7rem;
+      }
+      .gallery-frame.tall { grid-row: span 2; }
+      .gallery-frame.wide { grid-column: span 2; }
+    }
+
+
+    /* FLOATING THEME AND VOLUME CONTROLS */
+    .site-tools{position:fixed;top:1rem;right:1rem;z-index:1500;display:flex;flex-direction:column;align-items:flex-end;gap:.55rem}
+    .theme-toggle{width:44px;height:44px;border:1px solid rgba(201,162,124,.55);border-radius:50%;background:rgba(247,242,234,.95);color:#4b4034;box-shadow:0 4px 18px rgba(0,0,0,.12);font-size:1.15rem;cursor:pointer;backdrop-filter:blur(12px)}
+    .volume-control{display:flex;align-items:center;gap:.55rem;padding:.55rem .8rem;border:1px solid rgba(201,162,124,.55);border-radius:999px;background:rgba(247,242,234,.95);color:#574a3c;box-shadow:0 4px 18px rgba(0,0,0,.10);backdrop-filter:blur(12px)}
+    .volume-control input{width:88px;accent-color:#b99a65;cursor:pointer}
+    .volume-value{min-width:2.6em;text-align:right;color:#817666;font:.68rem Arial,sans-serif}
+    /* MUSIC PLAYER — follows the site's active theme */
+    .music-section{min-height:100vh;padding:5.5rem 1.25rem;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--text);transition:background .35s ease,color .35s ease}
+    .music-player{width:min(100%,440px);padding:1.4rem;border:1px solid var(--line);border-radius:25px;background:linear-gradient(145deg,var(--bg-soft),var(--bg));box-shadow:0 16px 45px rgba(0,0,0,.22);text-align:center;transition:background .35s ease,border-color .35s ease}
+    .music-status{margin:0 .2rem 1rem;text-align:right;color:var(--accent);font:.58rem Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase}
+    .music-cover{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:15px;box-shadow:0 8px 22px rgba(0,0,0,.22)}
+    .music-title{margin:1.1rem 0 .1rem;color:var(--text);font:400 1.8rem/1.2 'Playfair Display',serif}
+    .music-artist{color:var(--text-muted);font:.78rem Arial,sans-serif}
+    .music-progress-row{display:flex;align-items:center;gap:.65rem;margin:1.2rem 0 .9rem;color:var(--text-muted);font:.65rem Arial,sans-serif}
+    .music-progress-row input{flex:1;min-width:0;accent-color:var(--accent);cursor:pointer}
+    .music-actions{display:flex;align-items:center;justify-content:center;gap:1.2rem}
+    .music-actions button{border:0;background:transparent;color:var(--accent-soft);cursor:pointer;font-size:1.1rem;min-width:36px;min-height:40px}
+    .music-actions .play-button{width:54px;height:54px;border:1px solid var(--accent);border-radius:50%;background:var(--bg-soft);color:var(--text);font-size:1.25rem}
+    .music-footnote{margin-top:.8rem;color:var(--text-muted);font:.62rem Arial,sans-serif}
+    body.light-mode{--bg:#e7dfd4;--bg-soft:#f0e9df;--text:#2d2823;--text-muted:#6f655b;--accent:#a9824d;--accent-soft:#6f5535;--line:rgba(169,130,77,.35)}
+    body.light-mode .music-player{box-shadow:0 16px 45px rgba(63,48,29,.09)}
+    body.light-mode .music-cover{box-shadow:0 8px 22px rgba(34,25,18,.13)}
+    body.light-mode .hero,body.light-mode .countdown-section,body.light-mode .theme-section,body.light-mode .venue-section{background:#e7dfd4}
+    body.light-mode .intro{background:#e7dfd4}
+    body.light-mode .intro-text,body.light-mode .intro-sub,body.light-mode .intro-hint{color:#715d43}
+    body.light-mode .segments-section{background:#e7dfd4}
+    body.light-mode .segment-poster{background:linear-gradient(135deg,#f0e9df,#ddd2c3)}
+    body.light-mode .segment-names li{color:#453b31}
+    body.light-mode .segment-photo{background:linear-gradient(145deg,#d9cdbd,#c9bba8)}
+    body.light-mode .gallery-section{background:#dcd2c5}
+    body.light-mode .gallery-frame{background:linear-gradient(145deg,#eee5d9,#d8cbbb)}
+    body.light-mode footer{border-color:rgba(169,130,77,.25)}
+    @media(max-width:480px){.site-tools{top:.65rem;right:.65rem;gap:.4rem}.theme-toggle{width:40px;height:40px}.volume-control{padding:.45rem .65rem}.volume-control input{width:72px}.music-player{padding:1rem}}
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 700px) {
+      .venue-grid {
+        grid-template-columns: 1fr;
+      }
+      .map-card {
+        min-height: 240px;
+      }
+      .map-embed {
+        min-height: 240px;
+      }
+      .full-section {
+        padding: 3rem 1.25rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .countdown-grid {
+        gap: 0.55rem;
+      }
+      .countdown-item {
+        padding: 1.15rem 0.3rem 0.95rem;
+      }
+      .venue-card {
+        padding: 2rem 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="site-tools" aria-label="site controls">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Toggle light and dark mode">☼</button>
+    <label class="volume-control" aria-label="Music volume">
+      <span>♫</span>
+      <input id="volumeSlider" type="range" min="0" max="100" value="12" aria-label="Adjust music volume">
+      <span class="volume-value" id="volumeValue">12%</span>
+    </label>
+  </div>
+
+
+  <!-- INTRO OVERLAY -->
+  <div class="intro" id="intro">
+    <div class="intro-line"></div>
+    <p class="intro-text">You are cordially invited</p>
+    <p class="intro-sub">to an evening of allure</p>
+    <p class="intro-hint">Tap to open</p>
+  </div>
+
+  <!-- HERO (full screen) -->
+  <section class="full-section hero">
+    <div class="hero-ornament reveal" data-delay="0"></div>
+    <p class="hero-label reveal" data-delay="100">You are cordially invited</p>
+    <h1 class="hero-title reveal" data-delay="250">An Ode to<br>Her Allure</h1>
+    <p class="hero-subtitle reveal" data-delay="450">A night dedicated to the art of being her</p>
+
+    <div class="scroll-hint" id="scrollHint">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN (full screen) -->
+  <section class="full-section countdown-section">
+    <p class="section-label">The Celebration Awaits</p>
+    <h2 class="countdown-title">Counting the moments</h2>
+    <p class="countdown-sub">Until we gather for an evening filled with allure, elegance, and unforgettable memories.</p>
+
+    <div class="countdown-grid">
+      <div class="countdown-item">
+        <span class="countdown-number" id="days">00</span>
+        <span class="countdown-label">Days</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="hours">00</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="minutes">00</span>
+        <span class="countdown-label">Minutes</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="seconds">00</span>
+        <span class="countdown-label">Seconds</span>
+      </div>
+    </div>
+
+    <p class="countdown-note">Every second brings us closer.</p>
+  </section>
+
+
+
+
+  <!-- DRESS CODE -->
+  <section class="dress-code-section" id="dress-code">
+    <div class="dress-code-header reveal">
+      <p class="section-label">your presence, beautifully styled</p>
+      <h2 class="dress-code-title">Dress code</h2>
+      <p class="dress-code-subtitle">Sexy but formal. Dress to impress and celebrate in style.</p>
+    </div>
+
+    <div class="dress-code-content">
+      <div class="reveal">
+        <p class="dress-code-palette-label">the required attire</p>
+        <div class="dress-code-swatch-wrap">
+          <div>
+            <div class="dress-code-swatch"></div>
+            <p class="dress-code-swatch-name">Black</p>
+          </div>
+        </div>
+        <p class="dress-code-note">Please wear black formal or semi-formal attire. Kindly avoid denim. Thank you for keeping the evening's look elegant and cohesive.</p>
+      </div>
+
+      <blockquote class="dress-code-quote reveal">
+        <strong>a little style note</strong>
+        “Sexy but formal. All black, no denim. Let’s make the night effortlessly elegant.”
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- VENUE (full screen) -->
+  <section class="full-section venue-section">
+    <div class="venue-header">
+      <p class="section-label">Where We Meet</p>
+      <h2 class="venue-title">A place to celebrate</h2>
+    </div>
+
+    <div class="venue-grid">
+      <div class="venue-card">
+        <p class="venue-card-label">The Venue</p>
+        <h3 class="venue-name">Rodolfo’s Garden</h3>
+        <p class="venue-address">
+          Tuazon Farm, Brgy. Lara<br>
+          City of San Fernando, Pampanga 2000
+        </p>
+        <p class="venue-note">We look forward to welcoming you.</p>
+        <a href="https://maps.app.goo.gl/dQcPVLtREmV2U9qn9" target="_blank" rel="noopener" class="btn">
+          View Location →
+        </a>
+      </div>
+
+      <div class="map-card">
+        <iframe 
+          class="map-embed"
+          src="https://maps.google.com/maps?q=Rodolfo%27s+Garden+Events+Place+and+Functions,+Tuazon+Farm,+Brgy.+Lara,+San+Fernando,+Pampanga&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-overlay">
+          <span class="map-label">Save the evening</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- THE 18 SEGMENTS: PHOTO + PARTICIPANT NAMES -->
+  <section class="segments-section" id="the-18s">
+    <div class="segments-intro reveal">
+      <p class="section-label">A celebration of the people we cherish</p>
+      <h2 class="segments-title">The 18 Segments</h2>
+      <p class="segments-description">A special place for the people who will make this evening unforgettable.</p>
+    </div>
+
+    <article class="segment-poster">
+      <div class="segment-photo" aria-label="photo placeholder for Roses">
+        <span class="photo-placeholder-mark">A</span>
+        <span class="photo-placeholder-caption">celebrant photo will be added after photoshoot</span>
+      </div>
+      <div class="segment-copy">
+        <p class="segment-kicker">a special part of the celebration</p>
+        <h3 class="segment-script">Roses</h3>
+        <ol class="segment-names" data-names="roses">
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+        </ol>
+        <p class="segment-index">01 — 18</p>
+      </div>
+    </article>
+
+    <article class="segment-poster">
+      <div class="segment-photo" aria-label="photo placeholder for Candles">
+        <span class="photo-placeholder-mark">A</span>
+        <span class="photo-placeholder-caption">celebrant photo will be added after photoshoot</span>
+      </div>
+      <div class="segment-copy">
+        <p class="segment-kicker">a special part of the celebration</p>
+        <h3 class="segment-script">Candles</h3>
+        <ol class="segment-names" data-names="candles">
+            <li class="">Marilyn Obispo</li>
+            <li class="">Nanay Marina</li>
+            <li class="">Mary Jane Cruz</li>
+            <li class="">Aya Alejo</li>
+            <li class="">Carla Villaflor</li>
+            <li class="">Alexa Peralta</li>
+            <li class="">Loraine Obispo</li>
+            <li class="">Shino Sayuri</li>
+            <li class="">Carrissa Sarsona</li>
+            <li class="">Veronica Lopez</li>
+            <li class="">Sandra Obispo</li>
+            <li class="">Cheska</li>
+            <li class="">Zylanie Chelize</li>
+            <li class="">Cher Clarice</li>
+            <li class="">Edcel Gloria</li>
+            <li class="">Mayeng Devera</li>
+            <li class="">Steffanie Cole</li>
+            <li class="">Yukanna Marley</li>
+        </ol>
+        <p class="segment-index">01 — 18</p>
+      </div>
+    </article>
+
+    <article class="segment-poster">
+      <div class="segment-photo" aria-label="photo placeholder for Treasures">
+        <span class="photo-placeholder-mark">A</span>
+        <span class="photo-placeholder-caption">celebrant photo will be added after photoshoot</span>
+      </div>
+      <div class="segment-copy">
+        <p class="segment-kicker">a special part of the celebration</p>
+        <h3 class="segment-script">Treasures</h3>
+        <ol class="segment-names" data-names="treasures">
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+        </ol>
+        <p class="segment-index">01 — 18</p>
+      </div>
+    </article>
+
+    <article class="segment-poster">
+      <div class="segment-photo" aria-label="photo placeholder for Blue Bills">
+        <span class="photo-placeholder-mark">A</span>
+        <span class="photo-placeholder-caption">celebrant photo will be added after photoshoot</span>
+      </div>
+      <div class="segment-copy">
+        <p class="segment-kicker">a special part of the celebration</p>
+        <h3 class="segment-script">Blue Bills</h3>
+        <ol class="segment-names" data-names="blue-bills">
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+        </ol>
+        <p class="segment-index">01 — 18</p>
+      </div>
+    </article>
+
+    <article class="segment-poster">
+      <div class="segment-photo" aria-label="photo placeholder for Shots">
+        <span class="photo-placeholder-mark">A</span>
+        <span class="photo-placeholder-caption">celebrant photo will be added after photoshoot</span>
+      </div>
+      <div class="segment-copy">
+        <p class="segment-kicker">a special part of the celebration</p>
+        <h3 class="segment-script">Shots</h3>
+        <ol class="segment-names" data-names="shots">
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+            <li class="placeholder-name">name to be added</li>
+        </ol>
+        <p class="segment-index">01 — 18</p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- EDITORIAL PHOTO GALLERY -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-heading reveal">
+      <p class="section-label">A collection of moments</p>
+      <h2 class="gallery-title">The Gallery</h2>
+      <p class="gallery-description">A glimpse of the girl of the evening.</p>
+    </div>
+    <div class="editorial-gallery">
+      <div class="gallery-frame tall"><span>A</span><small>portrait one</small></div>
+      <div class="gallery-frame"><span>Her moment</span><small>portrait two</small></div>
+      <div class="gallery-frame"><span>✦</span><small>portrait three</small></div>
+      <div class="gallery-frame wide"><span>An Ode to Her Allure</span><small>the birthday girl</small></div>
+    </div>
+  </section>
+
+  <!-- BACKGROUND MUSIC PLAYER -->
+  <section class="music-section" id="music">
+    <div class="music-player reveal">
+      <p class="music-status" id="musicStatus">now playing</p>
+      <img class="music-cover" src="data:image/webp;base64,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" alt="PARTYNEXTDOOR cover art">
+      <h2 class="music-title">Make It To The Morning</h2>
+      <p class="music-artist">Background music</p>
+      <audio id="backgroundAudio" preload="metadata" loop>
+        <source src="pnd.mp3" type="audio/mpeg">
+      </audio>
+      <div class="music-progress-row">
+        <span id="currentTime">0:00</span>
+        <input id="seekSlider" type="range" min="0" max="100" value="0" aria-label="Seek through music">
+        <span id="duration">0:00</span>
+      </div>
+      <div class="music-actions">
+        <button type="button" id="restartMusic" aria-label="Restart song" title="Restart">⏮</button>
+        <button type="button" class="play-button" id="playMusic" aria-label="Play music" title="Play">▶</button>
+        <button type="button" id="stopMusic" aria-label="Stop song" title="Stop">■</button>
+      </div>
+      <p class="music-footnote">soft background music</p>
+    </div>
+  </section>
+
+  <!-- FOOTER: final message after the song -->
+  <footer>
+    <p>We can’t wait to celebrate with you <span class="heart">✦</span></p>
+  </footer>
+
+  <script>
+
+
+    // THEME SWITCH
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      const light = document.body.classList.toggle('light-mode');
+      themeToggle.textContent = light ? '☾' : '☼';
+      themeToggle.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+      themeToggle.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+    });
+
+    // BACKGROUND MUSIC PLAYER
+    const audio = document.getElementById('backgroundAudio');
+    const playButton = document.getElementById('playMusic');
+    const seekSlider = document.getElementById('seekSlider');
+    const currentTimeLabel = document.getElementById('currentTime');
+    const durationLabel = document.getElementById('duration');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeValue = document.getElementById('volumeValue');
+    const musicStatus = document.getElementById('musicStatus');
+    audio.volume = 0.12;
+
+    function formatTime(seconds) {
+      if (!Number.isFinite(seconds)) return '0:00';
+      return `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60).toString().padStart(2, '0')}`;
+    }
+
+    playButton.addEventListener('click', async () => {
+      if (audio.paused) {
+        try {
+          await audio.play();
+          playButton.textContent = 'Ⅱ';
+          playButton.setAttribute('aria-label', 'Pause music');
+          musicStatus.textContent = 'now playing';
+        } catch (error) {
+          musicStatus.textContent = 'place pnd.mp3 beside index.html';
+        }
+      } else {
+        audio.pause();
+        playButton.textContent = '▶';
+        playButton.setAttribute('aria-label', 'Play music');
+        musicStatus.textContent = 'music paused';
+      }
+    });
+
+    document.getElementById('stopMusic').addEventListener('click', () => {
+      audio.pause();
+      audio.currentTime = 0;
+      playButton.textContent = '▶';
+      playButton.setAttribute('aria-label', 'Play music');
+      musicStatus.textContent = 'music stopped';
+    });
+
+    document.getElementById('restartMusic').addEventListener('click', () => {
+      audio.currentTime = 0;
+      if (audio.paused) {
+        audio.play().then(() => {
+          playButton.textContent = 'Ⅱ';
+          playButton.setAttribute('aria-label', 'Pause music');
+          musicStatus.textContent = 'now playing';
+        }).catch(() => { musicStatus.textContent = 'place pnd.mp3 beside index.html'; });
+      }
+    });
+
+    audio.addEventListener('loadedmetadata', () => durationLabel.textContent = formatTime(audio.duration));
+    audio.addEventListener('timeupdate', () => {
+      currentTimeLabel.textContent = formatTime(audio.currentTime);
+      durationLabel.textContent = formatTime(audio.duration);
+      if (Number.isFinite(audio.duration) && audio.duration > 0 && !seekSlider.matches(':active')) {
+        seekSlider.value = (audio.currentTime / audio.duration) * 100;
+      }
+    });
+    seekSlider.addEventListener('input', () => {
+      if (Number.isFinite(audio.duration) && audio.duration > 0) {
+        audio.currentTime = (Number(seekSlider.value) / 100) * audio.duration;
+      }
+    });
+    volumeSlider.addEventListener('input', () => {
+      audio.volume = Number(volumeSlider.value) / 100;
+      volumeValue.textContent = `${volumeSlider.value}%`;
+    });
+    audio.addEventListener('ended', () => {
+      playButton.textContent = '▶';
+      playButton.setAttribute('aria-label', 'Play music');
+    });
+
+    // ========== STAGGERED PARTICIPANT NAME ANIMATIONS ==========
+    const nameObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const names = entry.target.querySelectorAll('li');
+          names.forEach((name, index) => {
+            name.style.transitionDelay = `${index * 75}ms`;
+            requestAnimationFrame(() => name.classList.add('visible'));
+          });
+          nameObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.segment-names').forEach(list => {
+      nameObserver.observe(list);
+    });
+
+    // ========== INTRO (click to continue) ==========
+    const intro = document.getElementById('intro');
+    const scrollHint = document.getElementById('scrollHint');
+    let introOpened = false;
+
+    setTimeout(() => intro.classList.add('show-line'), 200);
+    setTimeout(() => intro.classList.add('show-text'), 500);
+    setTimeout(() => intro.classList.add('show-sub'), 900);
+    setTimeout(() => intro.classList.add('show-hint'), 1400);
+
+    function openInvitation() {
+      if (introOpened) return;
+      introOpened = true;
+
+      // Start the background track from the user's Tap to Open interaction.
+      // This is a user gesture, so browsers can allow playback without a second tap.
+      audio.play().then(() => {
+        playButton.textContent = 'Ⅱ';
+        playButton.setAttribute('aria-label', 'Pause music');
+        musicStatus.textContent = 'now playing';
+      }).catch(() => {
+        musicStatus.textContent = 'tap play if music does not start';
+      });
+
+      intro.classList.add('hide');
+
+      document.querySelectorAll('.reveal').forEach(el => {
+        const delay = parseInt(el.dataset.delay) || 0;
+        setTimeout(() => el.classList.add('visible'), delay);
+      });
+
+      setTimeout(() => scrollHint.classList.add('visible'), 1200);
+    }
+
+    intro.addEventListener('click', openInvitation);
+
+    document.addEventListener('keydown', (e) => {
+      if (!introOpened && (e.key === 'Enter' || e.key === ' ')) {
+        openInvitation();
+      }
+    });
+
+    // ========== COUNTDOWN ==========
+    const targetDate = new Date('2026-12-14T18:00:00+08:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(3, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
